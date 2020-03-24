@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-datafilter": [
+        "dist/ng-datafilter"
+      ],
+      "ng-datafilter/*": [
+        "dist/ng-datafilter/*"
+      ]
+    }
   }
 }

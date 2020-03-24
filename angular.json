@@ -2,5 +2,169 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ng-datafilter": {
+      "root": "projects/ng-datafilter",
+      "sourceRoot": "projects/ng-datafilter/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-datafilter/tsconfig.lib.json",
+            "project": "projects/ng-datafilter/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-datafilter/src/test.ts",
+            "tsConfig": "projects/ng-datafilter/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-datafilter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-datafilter/tsconfig.lib.json",
+              "projects/ng-datafilter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "datafilter-lib-test": {
+      "root": "projects/datafilter-lib-test/",
+      "sourceRoot": "projects/datafilter-lib-test/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/datafilter-lib-test",
+            "index": "projects/datafilter-lib-test/src/index.html",
+            "main": "projects/datafilter-lib-test/src/main.ts",
+            "polyfills": "projects/datafilter-lib-test/src/polyfills.ts",
+            "tsConfig": "projects/datafilter-lib-test/tsconfig.app.json",
+            "assets": [
+              "projects/datafilter-lib-test/src/favicon.ico",
+              "projects/datafilter-lib-test/src/assets"
+            ],
+            "styles": [
+              "projects/datafilter-lib-test/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/datafilter-lib-test/src/environments/environment.ts",
+                  "with": "projects/datafilter-lib-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "datafilter-lib-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "datafilter-lib-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "datafilter-lib-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/datafilter-lib-test/src/test.ts",
+            "polyfills": "projects/datafilter-lib-test/src/polyfills.ts",
+            "tsConfig": "projects/datafilter-lib-test/tsconfig.spec.json",
+            "karmaConfig": "projects/datafilter-lib-test/karma.conf.js",
+            "styles": [
+              "projects/datafilter-lib-test/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/datafilter-lib-test/src/favicon.ico",
+              "projects/datafilter-lib-test/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/datafilter-lib-test/tsconfig.app.json",
+              "projects/datafilter-lib-test/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "datafilter-lib-test-e2e": {
+      "root": "projects/datafilter-lib-test-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/datafilter-lib-test-e2e/protractor.conf.js",
+            "devServerTarget": "datafilter-lib-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "datafilter-lib-test:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/datafilter-lib-test-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ng-datafilter"
 }
