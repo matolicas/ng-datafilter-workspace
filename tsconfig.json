@@ -21,9 +21,6 @@
     "paths": {
       "ng-datafilter": [
         "dist/ng-datafilter"
-      ],
-      "ng-datafilter/*": [
-        "dist/ng-datafilter/*"
       ]
     }
   }
